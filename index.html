@@ -7,27 +7,47 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Login Section -->
+    <div id="login-form">
+        <h2>Login to Your Account</h2>
+        <label for="username">Username: </label>
+        <input type="text" id="username" placeholder="Enter your username" />
+        <button onclick="login()">Login</button>
+    </div>
 
-    <h1>Workout Logger</h1>
+    <!-- Workout Form Section -->
+    <div id="workout-form" style="display:none;">
+        <h2>Log Your Workout</h2>
+        <label for="exercise">Exercise: </label>
+        <input type="text" id="exercise" placeholder="Exercise name" />
+        
+        <label for="sets">Sets: </label>
+        <input type="number" id="sets" placeholder="Sets" />
+        
+        <label for="reps">Reps: </label>
+        <input type="number" id="reps" placeholder="Reps" />
+        
+        <label for="weight">Weight: </label>
+        <input type="number" id="weight" placeholder="Weight" />
+        
+        <label for="feedback">Feedback: </label>
+        <textarea id="feedback" placeholder="How did the workout feel?"></textarea>
 
-    <!-- Notification -->
-    <div id="notification" class="hidden">Workout Logged Successfully!</div>
+        <!-- Additional fields for reps in reserve and pump rating -->
+        <label for="reps-in-reserve">Reps in Reserve: </label>
+        <input type="number" id="reps-in-reserve" placeholder="Reps in reserve" />
+        
+        <label for="pump-rating">Pump Rating (1-10): </label>
+        <input type="number" id="pump-rating" min="1" max="10" placeholder="Pump rating (1-10)" />
+        
+        <button onclick="saveWorkout()">Save Workout</button>
+    </div>
 
-    <!-- Workout Form -->
-    <form id="workout-form" onsubmit="logWorkout(event)">
-        <input type="text" id="exercise" placeholder="Exercise Name" required>
-        <input type="number" id="sets" placeholder="Sets" required>
-        <input type="number" id="reps" placeholder="Reps" required>
-        <input type="number" id="weight" placeholder="Weight (lbs)" required>
-        <input type="number" id="reps-in-reserve" placeholder="Reps in Reserve" required> <!-- 🆕 -->
-        <input type="number" id="pump-rating" placeholder="Pump Rating (1-10)" min="1" max="10" required> <!-- 🆕 -->
-        <textarea id="feedback" placeholder="Feedback (optional)"></textarea>  <!-- 🆕 -->
-        <button type="submit">Log Workout</button>
-    </form>
-    
-
-    <!-- Workout History -->
-    <div id="workout-history"></div>
+    <!-- Workout History Section -->
+    <div id="workout-history" style="display:none;">
+        <h2>Your Workout History</h2>
+        <ul id="workout-list"></ul>
+    </div>
 
     <script src="app.js"></script>
 </body>
