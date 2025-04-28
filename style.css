@@ -1,132 +1,179 @@
-/* General Styles */
+/* Global Styles */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #0a0a0a;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(145deg, #2c3e50, #34495e); /* Dark gradient for a sleek, modern look */
     color: #ffffff;
-    padding: 20px;
-    text-align: center;
-}
-
-/* Header */
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #00ffe0;
-}
-
-/* Form */
-form {
+    margin: 0;
+    padding: 0;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
-    margin: 0 auto 30px auto;
 }
 
-input, button {
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+/* Heading Styles */
+h2 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #ecf0f1;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-input {
-    background-color: #1a1a1a;
-    color: #ffffff;
+/* Login Form */
+#login-form, #workout-form, #workout-history {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark background for form */
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    margin: 20px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
 }
 
+/* Form Hover Animation */
+#login-form:hover, #workout-form:hover, #workout-history:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Input & Textarea Styling */
+input, textarea, button {
+    margin: 15px 0;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+/* Input Focus & Hover */
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #f39c12; /* Gold border for focus */
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 8px rgba(243, 156, 18, 0.8); /* Glowing effect */
+}
+
+input:hover, textarea:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Buttons */
 button {
-    background-color: #00ffe0;
-    color: #000000;
+    background: linear-gradient(145deg, #1abc9c, #16a085); /* Teal gradient for premium look */
+    color: #ffffff;
+    border: none;
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+    width: 100%;
 }
 
+/* Button Hover */
 button:hover {
-    background-color: #00bfa6;
+    background: linear-gradient(145deg, #16a085, #1abc9c); /* Reversed gradient on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* Button Active */
+button:active {
+    background: linear-gradient(145deg, #16a085, #1abc9c);
+    transform: translateY(2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Delete Button */
+button.delete {
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+}
+
+button.delete:hover {
+    background: linear-gradient(145deg, #c0392b, #e74c3c);
+}
+
+button.delete:active {
+    background: linear-gradient(145deg, #c0392b, #e74c3c);
+}
+
+/* Card-Like Design for History & Forms */
+.card {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.card-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #f39c12;
+    margin-bottom: 20px;
+}
+
+.card-content {
+    color: #ddd;
+    font-size: 16px;
 }
 
 /* Workout History */
 #workout-history {
     max-width: 600px;
-    margin: 0 auto;
-    text-align: left;
+    width: 100%;
 }
 
-/* Individual Workout Entry */
-.workout-entry {
-    background-color: #1a1a1a;
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: 15px 0;
     padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #00ffe0;
-    animation: fadeSlideIn 0.5s ease forwards;
-}
-
-/* Buttons inside Workout History */
-.edit-btn, .delete-btn {
-    margin-top: 10px;
-    margin-right: 10px;
-    padding: 6px 12px;
-    font-size: 0.9rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.edit-btn {
-    background-color: #ffd700;
-    color: #000;
-}
-
-.edit-btn:hover {
-    background-color: #e5c100;
-}
-
-.delete-btn {
-    background-color: #ff4c4c;
-    color: #fff;
-}
-
-.delete-btn:hover {
-    background-color: #e04343;
-}
-
-/* Notification Styles */
-#notification {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #00ffe0;
-    color: #000000;
-    font-weight: bold;
-    padding: 15px 30px;
     border-radius: 12px;
-    box-shadow: 0 0 15px #00ffe0, 0 0 30px #00ffe0;
-    font-size: 18px;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.3s ease;
 }
 
-/* Visible Notification */
-#notification.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(10px);
+/* Hover Effect on Workout History Items */
+li:hover {
+    transform: scale(1.03);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Animation Keyframes */
-@keyframes fadeSlideIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
+li button {
+    margin-left: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
     }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
+
+    #login-form, #workout-form, #workout-history {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 26px;
     }
 }
