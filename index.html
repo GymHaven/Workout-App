@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Logger</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Workout Logger</h1>
+
+    <!-- Notification -->
+    <div id="notification" class="hidden">Workout Logged Successfully!</div>
+
+    <!-- Workout Form -->
+    <form id="workout-form" onsubmit="logWorkout(event)">
+        <input type="text" id="exercise" placeholder="Exercise Name" required>
+        <input type="number" id="sets" placeholder="Sets" required>
+        <input type="number" id="reps" placeholder="Reps" required>
+        <input type="number" id="weight" placeholder="Weight (lbs)" required>
+        <input type="number" id="reps-in-reserve" placeholder="Reps in Reserve" required> <!-- 🆕 -->
+        <input type="number" id="pump-rating" placeholder="Pump Rating (1-10)" min="1" max="10" required> <!-- 🆕 -->
+        <textarea id="feedback" placeholder="Feedback (optional)"></textarea>  <!-- 🆕 -->
+        <button type="submit">Log Workout</button>
+    </form>
+    
+
+    <!-- Workout History -->
+    <div id="workout-history"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

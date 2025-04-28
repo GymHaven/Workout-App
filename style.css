@@ -1,0 +1,132 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Header */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #00ffe0;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto 30px auto;
+}
+
+input, button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+input {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+button {
+    background-color: #00ffe0;
+    color: #000000;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #00bfa6;
+}
+
+/* Workout History */
+#workout-history {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Individual Workout Entry */
+.workout-entry {
+    background-color: #1a1a1a;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ffe0;
+    animation: fadeSlideIn 0.5s ease forwards;
+}
+
+/* Buttons inside Workout History */
+.edit-btn, .delete-btn {
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn {
+    background-color: #ffd700;
+    color: #000;
+}
+
+.edit-btn:hover {
+    background-color: #e5c100;
+}
+
+.delete-btn {
+    background-color: #ff4c4c;
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background-color: #e04343;
+}
+
+/* Notification Styles */
+#notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #00ffe0;
+    color: #000000;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #00ffe0, 0 0 30px #00ffe0;
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 1000;
+}
+
+/* Visible Notification */
+#notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(10px);
+}
+
+/* Animation Keyframes */
+@keyframes fadeSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
