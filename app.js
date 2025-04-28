@@ -1,95 +1,109 @@
-// Load workouts from local storage
-let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+let currentUser = ''; // To store the current user's username
+let workouts = []; // To store workouts
 
-displayWorkouts(); // Initial display when the page loads
+// Function to handle user login
+function login() {
+    currentUser = document.getElementById('username').value.trim();
+    if (currentUser === '') {
+        alert('Please enter a username!');
+        return;
+    }
 
-// Show Notification
-function showNotification(message) {
-    const notification = document.getElementById('notification');
-    notification.textContent = message;
-    notification.classList.add('show');
+    // Check if user data exists in localStorage
+    const storedWorkouts = localStorage.getItem(currentUser);
+    if (storedWorkouts) {
+        workouts = JSON.parse(storedWorkouts);
+    } else {
+        workouts = [];
+    }
 
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 2000);
+    // Hide login form and show workout form
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('workout-form').style.display = 'block';
+    document.getElementById('workout-history').style.display = 'block';
+
+    displayWorkouts();
 }
 
-// Log a new workout
-function logWorkout(event) {
-    event.preventDefault();
-
-    // Get values from form inputs
+// Function to save the workout
+function saveWorkout() {
     const exercise = document.getElementById('exercise').value;
     const sets = document.getElementById('sets').value;
     const reps = document.getElementById('reps').value;
     const weight = document.getElementById('weight').value;
-    const repsInReserve = document.getElementById('reps-in-reserve').value; // 🆕 Capture Reps in Reserve
-    const pumpRating = document.getElementById('pump-rating').value; // 🆕 Capture Pump Rating
-    const feedback = document.getElementById('feedback').value; // Get the feedback value
+    const feedback = document.getElementById('feedback').value;
+    const repsInReserve = document.getElementById('reps-in-reserve').value;
+    const pumpRating = document.getElementById('pump-rating').value;
 
-    // Create new workout object including feedback
-    const newWorkout = { exercise, sets, reps, weight, feedback,  repsInReserve, pumpRating  };
+    if (!exercise || !sets || !reps || !weight) {
+        alert('Please fill out all fields!');
+        return;
+    }
 
-    // Push new workout to workouts array
+    const newWorkout = {
+        exercise,
+        sets,
+        reps,
+        weight,
+        feedback,
+        repsInReserve,
+        pumpRating
+    };
     workouts.push(newWorkout);
 
-    // Save workouts to local storage
-    localStorage.setItem('workouts', JSON.stringify(workouts));
+    // Save to localStorage under current username
+    localStorage.setItem(currentUser, JSON.stringify(workouts));
 
-    // Display updated workout history
+    // Clear form and display updated workouts
+    document.getElementById('exercise').value = '';
+    document.getElementById('sets').value = '';
+    document.getElementById('reps').value = '';
+    document.getElementById('weight').value = '';
+    document.getElementById('feedback').value = '';
+    document.getElementById('reps-in-reserve').value = '';
+    document.getElementById('pump-rating').value = '';
+
     displayWorkouts();
-
-    // Show success notification
-    showNotification('Workout Logged Successfully!');
-
-    // Reset the form
-    document.getElementById('workout-form').reset();
 }
 
-// Display all workouts
+// Function to display all workouts
 function displayWorkouts() {
-    const history = document.getElementById('workout-history');
-    history.innerHTML = '';
+    const workoutList = document.getElementById('workout-list');
+    workoutList.innerHTML = ''; // Clear the list
 
     workouts.forEach((workout, index) => {
-        const workoutDiv = document.createElement('div');
-        workoutDiv.classList.add('workout-entry'); // Add the animation class here
-
-        workoutDiv.innerHTML = `
-            <strong>${workout.exercise}</strong>
-            <p>Sets: ${workout.sets} | Reps: ${workout.reps} | Weight: ${workout.weight} lbs</p>
-            <p>Reps in Reserve: ${workout.repsInReserve}</p> <!-- 🆕 Display Reps in Reserve -->
-            <p>Pump Rating: ${workout.pumpRating} / 10</p> <!-- 🆕 Display Pump Rating -->
-            ${workout.feedback ? `<p><em>Feedback:</em> ${workout.feedback}</p>` : ''}
-            <button class="edit-btn" onclick="editWorkout(${index})">Edit</button>
-            <button class="delete-btn" onclick="deleteWorkout(${index})">Delete</button>
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <strong>${workout.exercise}</strong> - Sets: ${workout.sets}, Reps: ${workout.reps}, Weight: ${workout.weight}
+            <br>Feedback: ${workout.feedback}
+            <br>Reps in Reserve: ${workout.repsInReserve}, Pump Rating: ${workout.pumpRating}
+            <button onclick="editWorkout(${index})">Edit</button>
+            <button onclick="deleteWorkout(${index})">Delete</button>
         `;
-
-        history.appendChild(workoutDiv);
+        workoutList.appendChild(li);
     });
 }
 
-// Delete a workout
+// Function to delete a workout
 function deleteWorkout(index) {
     workouts.splice(index, 1);
-    localStorage.setItem('workouts', JSON.stringify(workouts));
+    localStorage.setItem(currentUser, JSON.stringify(workouts));
     displayWorkouts();
-    showNotification('Workout Deleted');
 }
 
-// Edit a workout
+// Function to edit a workout
 function editWorkout(index) {
     const workout = workouts[index];
 
-    // Prefill the form with existing workout data
+    // Populate the form with the selected workout
     document.getElementById('exercise').value = workout.exercise;
     document.getElementById('sets').value = workout.sets;
     document.getElementById('reps').value = workout.reps;
     document.getElementById('weight').value = workout.weight;
-    document.getElementById('feedback').value = workout.feedback; // Prefill feedback too
+    document.getElementById('feedback').value = workout.feedback;
+    document.getElementById('reps-in-reserve').value = workout.repsInReserve;
+    document.getElementById('pump-rating').value = workout.pumpRating;
 
-    // Remove the old workout
-    workouts.splice(index, 1);
-    localStorage.setItem('workouts', JSON.stringify(workouts));
-    displayWorkouts();
+    // Remove the workout and allow re-entry
+    deleteWorkout(index);
 }
